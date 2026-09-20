@@ -87,3 +87,29 @@ Run it again, now CUDA is available:
 2026-09-20 15:03:53+02:00 PyTorch CUDA version:  13.0
 2026-09-20 15:03:53+02:00 PyTorch CUDA available:  True
 ```
+
+## Hello Volumes
+
+Let's try to add a persistent disk image, called a Volume. See [hello_volume.py](./src/hello_volume.py)
+
+First, we have to create the Volume in Modal (in your default environment):
+
+```
+uv run modal volume create hello-volume
+```
+
+It creates the volume and shows how to use it:
+```python
+@app.function(volumes={"/my_vol": modal.Volume.from_name("hello-volume")})                                                                                                                                                                                                                                          
+def some_func():                                                                                                                                                                                                                                                                                                    
+    os.listdir("/my_vol")                                                                                                                                                                                                                                                                                           
+```
+
+We can write to the volume in the remote function and access the volume from the local function.
+
+We can also download files from the volume from the CLI:
+
+```
+uv run modal volume get hello-volume foo.txt
+```
+
