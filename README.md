@@ -55,7 +55,7 @@ Note that we have to add two new declarations:
 ```python
 @app.function(gpu=None, image=modal.Image.debian_slim().uv_pip_install("torch").uv_pip_install("numpy"))
 def square(x: int) -> int:
-# ...
+    # ...
 ```
 
 Now run it:
@@ -77,7 +77,7 @@ We have to provision a gpu other than `None` to enable CUDA, T4 is the cheapest 
 ```python
 @app.function(gpu="T4", image=modal.Image.debian_slim().uv_pip_install("torch").uv_pip_install("numpy"))
 def square(x: int) -> int:
-# ...
+    # ...
 ```
 
 Run it again, now CUDA is available:
